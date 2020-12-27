@@ -15,22 +15,22 @@ import {
 } from 'react-native';
 
 import Login from "./components/Login"
-import Register from "./components/Register"
+import Registration from "./components/Register"
 
-const Stack = createStackNavigator();
 
 const App: () => React$Node = () => {
+const Stack = createStackNavigator();
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen
             name="Login"
             component={Login}
           />
           <Stack.Screen
             name="Register"
-            component={Register}
+            component={Registration}
           />
         </Stack.Navigator>
       </NavigationContainer>

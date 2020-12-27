@@ -35,17 +35,16 @@ connection.on("connect", err => {
     if (err) {
         console.error(err.message);
     } else {
-        // queryDatabase();
         console.log("Azure SQL Connected...");
     }
 });
 
-function queryDatabase(req, res) {
+function queryDatabase(req, res, query) {
     console.log("Reading rows from the Table...");
 
     // Read all rows from table
     const request = new Request(
-        `select * from weramble.test`,
+        query,
         (err, rowCount) => {
             if (err) {
                 console.error(err.message);
@@ -63,12 +62,19 @@ function queryDatabase(req, res) {
     });
 
     connection.execSql(request);
-    // return columns;
 }
 
-//SalesData
+//test
 app.get('/api/test', (req, res) => {
-    queryDatabase(req, res);
+    let query = `select * from weramble.test`;
+    queryDatabase(req, res, query);
+});
+
+//register
+app.get('/api/register/:email/:username/:password', (req, res) => {
+    const { email, username, password } = req.params;
+    let query = `insert into weramble.users(username, password, email) values ('${username}', '${password}', '${email}');`;
+    queryDatabase(req, res, query);
 });
 
 //listen

@@ -1,0 +1,1 @@
+insert into weramble.users(username, password, email) values ('a', 'b', 'c');
