@@ -1,36 +1,34 @@
 
 const { Connection, Request } = require("tedious");
 
-module.exports = {
-
-    connect: () => {
-        // Create connection to database
-        const config = {
-            authentication: {
-                options: {
-                    userName: "callum", // update me
-                    password: "0089fxcy?" // update me
-                },
-                type: "default"
-            },
-            server: "weramble.database.windows.net", // update me
-            options: {
-                database: "weramble", //update me
-                encrypt: true
-            }
-        };
-
-        const connection = new Connection(config);
-
-        // Attempt to connect and execute queries if connection goes through
-        connection.on("connect", err => {
-            if (err) {
-                console.error(err.message);
-            } else {
-                console.log("Azure SQL Connected...");
-            }
-        });
+// Create connection to database
+const config = {
+    authentication: {
+        options: {
+            userName: "callum", // update me
+            password: "0089fxcy?" // update me
+        },
+        type: "default"
     },
+    server: "weramble.database.windows.net", // update me
+    options: {
+        database: "weramble", //update me
+        encrypt: true
+    }
+};
+
+const connection = new Connection(config);
+
+// Attempt to connect and execute queries if connection goes through
+connection.on("connect", err => {
+    if (err) {
+        console.error(err.message);
+    } else {
+        console.log("Azure SQL Connected...");
+    }
+});
+
+module.exports = {
 
     queryDatabase: (req, res, query) => {
         console.log("Reading rows from the Table...");

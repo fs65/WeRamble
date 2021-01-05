@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import {ip, port} from "../utils"
 import {
     Text,
     StyleSheet,
@@ -15,7 +16,7 @@ export default function Registration({ navigation }) {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const route = "http://192.168.1.96:80/api/register"
+    const route = `http://${ip}:${port}/api/register`
 //
     function register() {
 

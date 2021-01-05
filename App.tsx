@@ -25,21 +25,12 @@ const App: () => React$Node = () => {
     <>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen
-            name="Login"
-            component={Login}
-          />
-          <Stack.Screen
-            name="Register"
-            component={Registration}
-          />
-          <Stack.Screen
-            name="Home"
-            component={Home}
-          />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Registration} />
+          <Stack.Screen name="Home" component={Home} />
+          {/*Add screens below*/}
         </Stack.Navigator>
       </NavigationContainer>
-      {/* <View><Text>HELLO</Text></View> */}
     </>
   );
 };

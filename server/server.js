@@ -1,11 +1,12 @@
-const { connect, queryDatabase } = require("./azure.js");
+const { queryDatabase } = require("./azure.js");
+const { port } = require("../utils.js")
 const { quote } = require("../utils.js");
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
+const fs = require('fs');
+const readFile = (file) => {return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" })};
 
 const app = express();
-connect();
 
 //test
 app.get('/api/test', (req, res) => {
@@ -24,16 +25,15 @@ app.get('/api/register/:email/:username/:password', (req, res) => {
 app.get('/api/login/:username/:password', (req, res) => {
     const { username, password } = req.params;
 
-    let query = fs.readFileSync(path.join('sql', 'login.sql'), { encoding: "UTF-8" })
+    let query = readFile("sql/login.sql") 
         .replace("${username}", quote(username))
         .replace("${email}", quote(username))
         .replace("${password}", quote(password))
-    // console.log(query);
     queryDatabase(req, res, query);
 });
 
 //listen
-let server = app.listen('80', (err) => {
+app.listen(port, (err) => {
     if (err) throw err;
-    else console.log(`Server started on port 80`);
+    else console.log(`Server started on port ${port}`);
 });
