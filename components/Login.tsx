@@ -12,34 +12,51 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 export default function Login({ navigation }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const route = "http://192.168.1.96:80/api/login"
 
-  // const route = "http://192.168.1.96:80/api/test"
-  // const [data, setData] = useState("");
+  function checkResponse(data) {
+    if (data) {
+      navigation.navigate("Home");
+    }
+    else { setError("Invalid Details") }
+  }
 
-  // async function fetchData() {
-  //   fetch(`${route}`)
-  //     .then(res => res.json())
-  //     .then(rows => setData(rows[0].value))
-  //     .catch(error => {
-  //       console.error(error)
-  //     })
-  // }
-  // useEffect(() => {
-  //   fetchData()
-  // })
-  function handlePress() {
-    console.log("object");
+  function login() {
+    if (username.length > 0 && password.length > 0) {
+      fetch(`${route}/${username}/${password}`)
+        .then(res => res.json())
+        .then(data => {
+          checkResponse(data)
+        })
+        .catch(error => {
+          console.error(error)
+        })
+    }
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.sectionTitle} >Username</Text>
-      <TextInput style={styles.input}></TextInput>
+      <TextInput
+        style={styles.input}
+        onChangeText={(v) => setUsername(v)} />
       <Text style={styles.sectionTitle} > Password</Text>
-      <TextInput style={styles.input}></TextInput>
+      <TextInput
+        style={styles.input}
+        onChangeText={(v) => setPassword(v)} />
       <Text style={styles.smallText}
         onPress={() => navigation.navigate('Register')}
       >New User? Register here</Text>
+      <Button
+        title="Login"
+        onPress={() => login()}
+      />
+      <Text
+        style={styles.sectionTitle}
+      > {error}</Text>
     </View>
   )
 }

@@ -1,0 +1,21 @@
+DevOps:
+    1. Organise so group can easily use
+        - Create instruction manual
+
+Login System:
+    1. E-mail verification
+    2. Forgot Password?
+    3. PW hashing / general security
+
+Home Page:
+    1. Content feed
+
+Profile Viewer:
+    1. Photo upload
+    2. Gallery
+    3. Account Settings
+
+Image Viewer:
+    1. Likes
+    2. Comments
+

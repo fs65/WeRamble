@@ -3,18 +3,21 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
+    "android": "concurrently \"react-native start\" \"npx react-native run-android\" \"npx react-native log-android\"",
+    "ios": "concurrently \"react-native start\" \"npx react-native run-ios\" \"npx react-native log-ios\"",
     "test": "jest",
     "lint": "eslint .",
-    "server": "node server"
+    "server": "node ./server/server"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
+    "@types/react-native": "^0.63.43",
+    "@types/tedious": "^4.0.3",
+    "concurrently": "^5.3.0",
     "express": "^4.17.1",
+    "express-mailer": "^0.3.1",
     "mysql": "^2.18.1",
     "react": "16.13.1",
     "react-native": "0.63.4",
@@ -37,5 +40,6 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "type": "commonjs"
 }
