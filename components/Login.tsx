@@ -6,7 +6,8 @@ import {
   View,
   TextInput,
   Button,
-  Alert
+  Alert,
+  Image
 } from 'react-native';
 import {
   Colors,
@@ -19,6 +20,7 @@ export default function Login({ navigation }) {
   const route = `http://${ip}:${port}/api/login`
 
   function checkResponse(data) {
+    console.log("DATA");
     if (data) {
       navigation.navigate("Home");
     }
@@ -68,6 +70,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: Colors.black,
     textAlign: "center",
+  },
+  tinylogo: {
+    width: 250,
+    height: 200,
   },
   smallText: {
     textAlign: "center",

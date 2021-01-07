@@ -1,10 +1,11 @@
 const { queryDatabase } = require("./azure.js");
+const { sendVerificationEmail } = require("./emailer.js")
 const { port } = require("../utils.js")
 const { quote } = require("../utils.js");
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const readFile = (file) => {return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" })};
+const readFile = (file) => { return fs.readFileSync(path.resolve(__dirname, file), { encoding: "UTF-8" }) };
 
 const app = express();
 
@@ -19,13 +20,20 @@ app.get('/api/register/:email/:username/:password', (req, res) => {
     const { email, username, password } = req.params;
     let query = `insert into weramble.users(username, password, email) values ('${username}', '${password}', '${email}');`;
     queryDatabase(req, res, query);
+    sendVerificationEmail();
+});
+
+//feed
+app.get('/api/feed', (req, res) => {
+    let query = readFile("sql/feed.sql")
+    queryDatabase(req, res, query);
 });
 
 //login
 app.get('/api/login/:username/:password', (req, res) => {
     const { username, password } = req.params;
 
-    let query = readFile("sql/login.sql") 
+    let query = readFile("sql/login.sql")
         .replace("${username}", quote(username))
         .replace("${email}", quote(username))
         .replace("${password}", quote(password))

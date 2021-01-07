@@ -31,6 +31,7 @@ connection.on("connect", err => {
 module.exports = {
 
     queryDatabase: (req, res, query) => {
+        let results = [];
         console.log("Reading rows from the Table...");
         // Read all rows from table
         const request = new Request(
@@ -40,18 +41,27 @@ module.exports = {
                     console.error(err.message);
                 } else {
                     console.log(`${rowCount} row(s) returned`);
-                    if (rowCount == 0)
-                        res.json(false);
                 }
             }
         );
 
         request.on("row", columns => {
             console.log(columns.length);
-            res.json(columns);
+            let chunk = {};
             columns.forEach(column => {
-                console.log("%s\t%s", column.metadata.colName, column.value);
+                let key = column.metadata.colName
+                let value = column.value
+                // console.log("%s\t%s", key, value);
+                chunk[key] = value;
             });
+            results.push(chunk);
+            console.log(chunk)
+        });
+
+        request.on("requestCompleted", columns => {
+            if (results.length > 0)
+                res.json(results);
+            else res.json(false);
         });
 
         connection.execSql(request);
