@@ -16,6 +16,7 @@ import {
 
 import Login from "./components/Login"
 import Registration from "./components/Register"
+import Camera from "./components/Camera"
 import Home from "./components/Home"
 
 
@@ -25,10 +26,11 @@ const App: () => React$Node = () => {
     <>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Login">
+          {/*Add screens below*/}
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Registration} />
           <Stack.Screen name="Home" component={Home} />
-          {/*Add screens below*/}
+          <Stack.Screen name="Camera" component={Camera} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

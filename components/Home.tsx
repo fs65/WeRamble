@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, Image, StyleSheet, Dimensions } from "react-native";
+import { Text, View, Image, StyleSheet, Dimensions, Button } from "react-native";
 import { ip, port } from "../utils"
 
 const route = `http://${ip}:${port}/api/feed`
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
 export default function Home({ navigation }) {
 
     const [gallery, setGallery] = useState([])
@@ -29,6 +30,7 @@ export default function Home({ navigation }) {
     }
 
     useEffect(() => {
+        console.log("CONN")
         fetch(`${route}`)
             .then(res => res.json())
             .then(data => {
@@ -43,7 +45,9 @@ export default function Home({ navigation }) {
 
     return (
         <View>
-            <View style={styles.gallery}>{gallery}</View>
+            {/* <View style={styles.gallery}>{gallery}</View> */}
+            <Button title="t" onPress={() => navigation.navigate("Camera")}>Camera</Button>
+
         </View>
     )
 }
