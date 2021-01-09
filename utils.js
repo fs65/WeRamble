@@ -7,5 +7,15 @@ module.exports = {
     //Useful functions
     quote: (string) => {
         return `'${string}'`
-    }
+    },
+    request: (route, callback) => fetch(route)
+        .then(res => res.json())
+        .then(data => {
+            if (data) {
+                callback(data)
+            }
+        })
+        .catch(error => {
+            console.error(error)
+        })
 }

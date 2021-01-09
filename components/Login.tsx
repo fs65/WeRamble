@@ -14,13 +14,12 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 export default function Login({ navigation }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("demo");
+  const [password, setPassword] = useState("demo");
   const [error, setError] = useState("");
   const route = `http://${ip}:${port}/api/login`
 
   function checkResponse(data) {
-    console.log("DATA");
     if (data) {
       navigation.navigate("Home");
     }
@@ -45,10 +44,12 @@ export default function Login({ navigation }) {
       <Text style={styles.sectionTitle} >Username</Text>
       <TextInput
         style={styles.input}
+        value={"demo"}
         onChangeText={(v) => setUsername(v)} />
       <Text style={styles.sectionTitle} > Password</Text>
       <TextInput
         style={styles.input}
+        value={"demo"}
         onChangeText={(v) => setPassword(v)} />
       <Text style={styles.smallText}
         onPress={() => navigation.navigate('Register')}

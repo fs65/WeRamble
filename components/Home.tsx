@@ -19,7 +19,7 @@ export default function Home({ navigation }) {
             for (let j = 0; j < 3; j++) {
                 let image = data[++i];
                 if (image) {
-                    images.push(<Image key={key++} source={{ uri: image.uri }} style={styles.thumbnail} />)
+                    images.push(<Image key={key++} source={{ uri: image.uri }} style={styles.thumbnail}  />)
                 }
             }
             let row =
@@ -30,7 +30,6 @@ export default function Home({ navigation }) {
     }
 
     useEffect(() => {
-        console.log("CONN")
         fetch(`${route}`)
             .then(res => res.json())
             .then(data => {
@@ -45,8 +44,8 @@ export default function Home({ navigation }) {
 
     return (
         <View>
-            {/* <View style={styles.gallery}>{gallery}</View> */}
-            <Button title="t" onPress={() => navigation.navigate("Camera")}>Camera</Button>
+            <View style={styles.gallery}>{gallery}</View>
+            <Button title="Camera" onPress={() => navigation.navigate("Camera")}></Button>
 
         </View>
     )
